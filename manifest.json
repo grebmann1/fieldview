@@ -1,0 +1,16 @@
+{
+ "manifest_version": 2,
+ "background": {
+			"persistant": false,
+			"scripts": [ "assets/js/background.js" ]
+ },
+  "name": "Field viewer 2",
+  "version": "1",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "page_action": {
+	  "default_icon": "icon_extension.png",
+	  "default_popup": "popup.html"
+   },
+  "permissions":["tabs","cookies","*://*.salesforce.com/*","*://*.force.com/*","declarativeContent"]
+
+}

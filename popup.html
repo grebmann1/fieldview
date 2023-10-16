@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+    <meta charset="utf-8"/>
+    <title>Salesforce Object</title>
+    <link href="assets/styles/custom.css" rel="stylesheet">
+    <link href="assets/styles/core.css" rel="stylesheet">
+    <style>
+        body {
+            width: 700px;
+            height: 600px;
+        }
+
+        #leftColumn {
+            width: 40%;
+        }
+
+        .email-invalid {
+            border-bottom: 1px solid orange;
+        }
+
+        #user-toDisplay {
+            font-size: small;
+        }
+
+        .exclude-overflow {
+            overflow-x: inherit !important;
+        }
+
+        td {
+            white-space: normal !important;
+
+        }
+
+        .slds-table_cell-buffer tr > th:first-child, .slds-table_cell-buffer tr > td:first-child, .slds-table--cell-buffer tr > th:first-child, .slds-table--cell-buffer tr > td:first-child {
+            padding-left: 1.5rem;
+        }
+
+        .container {
+            width: 100%;
+        }
+
+        tr > td {
+            overflow-x: auto !important;
+            margin-left: 2px;
+        }
+    </style>
+<body>
+<section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large slds-list-builder"
+         aria-labelledby="id-of-modalheader-h2" aria-modal="true" aria-describedby="modal-content-id-1">
+    <div class="slds-modal__container" style="margin:0; width:100%; height:100%; padding:0;">
+        <header class="slds-modal__header">
+            <!-- MENU -->
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-1">
+                    <!-- Data -->
+                    <button class="slds-button slds-button_icon slds-is-selected slds-button_icon-border-filled slds-float_left menu-item"
+                            data-action="data" aria-pressed="true" title="database">
+                        <svg class="slds-button__icon" aria-hidden="true">
+                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#database"></use>
+                        </svg>
+                        <span class="slds-assistive-text">Data</span>
+                    </button>
+                    <!-- Users -->
+                    <button class="slds-button slds-button_icon slds-button_icon-border-filled slds-float_left menu-item"
+                            data-action="user" aria-pressed="false" title="user_role">
+                        <svg class="slds-button__icon" aria-hidden="true">
+                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#user_role"></use>
+                        </svg>
+                        <span class="slds-assistive-text">User</span>
+                    </button>
+                </div>
+            </div>
+            <!-- the name of the object go there -->
+            <h2 id="title" class="slds-text-heading_medium"></h2>
+        </header>
+        <div class="slds-modal__content slds-grid slds-grow" id="modal-content-id-1">
+            <!-- SObject data START -->
+            <div class="slds-grid slds-grid_vertical container container-data">
+
+                <!-- Search START -->
+                <div class="slds-p-vertical_x-small slds-p-horizontal_large slds-shrink-none slds-theme_shade">
+                    <div class="slds-form-element">
+                        <label class="slds-form-element__label slds-assistive-text" for="data-search">Search</label>
+                        <div class="slds-form-element__control">
+                            <div class="slds-combobox_container">
+                                <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click"
+                                     aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                                    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+                                         role="none">
+                                        <input type="text" class="slds-input slds-combobox__input" id="data-search"
+                                               placeholder="Search Salesforce"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Search END -->
+                <div class="slds-scrollable slds-grow">
+                    <table role="grid"
+                           class="slds-table slds-table_cell slds-table_fixed-layout slds-table_bordered slds-table_resizable-cols slds-no-row-hover slds-scrollable_none"
+                           id="data-table">
+                        <thead>
+                        <tr class="slds-line-height_reset head">
+                            <th aria-label="Name" aria-sort="none"
+                                class="slds-is-sortable slds-is-resizable slds-text-title_caps" scope="col"
+                                id='leftColumn' draggable="false">
+                                <div class="slds-th__action slds-text-link_reset">
+                                    <span class="slds-truncate" title="Name">Field</span>
+                                </div>
+                            </th>
+                            <th aria-label="Product Code" aria-sort="none"
+                                class="slds-is-sortable slds-is-resizable slds-text-title_caps" scope="col">
+                                <div class="slds-th__action slds-text-link_reset">
+                                    <span class="slds-truncate" title="Product Code">Value</span>
+                                </div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="data-toDisplay">
+                        <!-- DATA are going here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--  SObject data END -->
+
+
+            <!-- User START -->
+            <div class="slds-grid slds-grid_vertical container container-user slds-hide">
+                <div class="slds-p-vertical_x-small slds-p-horizontal_large slds-shrink-none slds-theme_shade">
+                    <div class="slds-form-element">
+                        <label class="slds-form-element__label slds-assistive-text" for="user-search">Search</label>
+                        <div class="slds-form-element__control">
+                            <div class="slds-combobox_container">
+                                <div class="slds-combobox" aria-expanded="false" aria-haspopup="listbox"
+                                     role="combobox">
+
+                                    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+                                         role="none">
+                                        <!-- INPUT -->
+                                        <input style="width:calc(100% - 3em);" type="text"
+                                               class="slds-input slds-combobox__input" id="user-search"
+                                               placeholder="Search User"/>
+                                        <!-- MENU -->
+                                        <div class="slds-dropdown-trigger slds-dropdown-trigger--click"
+                                             style="float:right;min-height: calc(1.875rem + (1px * 2));">
+                                            <button class="slds-button slds-button_icon slds-button_icon-border-filled"
+                                                    aria-haspopup="true" title="Show More">
+                                                <svg class="slds-button__icon" aria-hidden="true">
+                                                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#down"></use>
+                                                </svg>
+                                                <span class="slds-assistive-text">Show More</span>
+                                            </button>
+                                            <div class="slds-dropdown slds-dropdown_right">
+                                                <ul class="slds-dropdown__list" id="user-menu" role="menu"
+                                                    aria-label="Show More">
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-scrollable slds-grow">
+                    <table role="grid"
+                           class="slds-table slds-table_cell slds-table_bordered slds-table_resizable-cols slds-no-row-hover slds-scrollable_none"
+                           style="width: auto;" id="user-table">
+                        <thead>
+                        <tr class="slds-line-height_reset head">
+                            <!-- IsActive -->
+                            <th aria-label="IsActive" aria-sort="none"
+                                class="slds-is-sortable slds-is-resizable slds-text-title_caps" style="width: 45px;"
+                                scope="col" draggable="false">
+                                <div class="slds-th__action slds-text-link_reset">
+                                    <span class="slds-truncate" title="IsActive">*</span>
+                                </div>
+                            </th>
+                            <!-- Name -->
+                            <th aria-label="Name" aria-sort="none"
+                                class="slds-is-sortable slds-is-resizable slds-text-title_caps" style="width: 170px;"
+                                scope="col" draggable="false">
+                                <div class="slds-th__action slds-text-link_reset">
+                                    <span class="slds-truncate" title="Name">Name</span>
+                                </div>
+                            </th>
+                            <!-- Email -->
+                            <th aria-label="Email" aria-sort="none"
+                                class="slds-is-sortable slds-is-resizable slds-text-title_caps" scope="col">
+                                <div class="slds-th__action slds-text-link_reset">
+                                    <span class="slds-truncate" title="Email">Email</span>
+                                </div>
+                            </th>
+                            <!-- Profile -->
+                            <th aria-label="Profile" aria-sort="none"
+                                class="slds-is-sortable slds-is-resizable slds-text-title_caps" scope="col">
+                                <div class="slds-th__action slds-text-link_reset">
+                                    <span class="slds-truncate" title="Profile">Profile</span>
+                                </div>
+                            </th>
+                            <!-- Last Login -->
+                            <th aria-label="Last Login" aria-sort="none"
+                                class="slds-is-sortable slds-is-resizable slds-text-title_caps" scope="col">
+                                <div class="slds-th__action slds-text-link_reset">
+                                    <span class="slds-truncate" title="Last Login">Last Login</span>
+                                </div>
+                            </th>
+                            <!-- Action(s) -->
+                            <th aria-label="Action(s)" aria-sort="none"
+                                class="slds-is-sortable slds-is-resizable slds-text-title_caps" style="width: 90px;"
+                                scope="col">
+                                <div class="slds-th__action slds-text-link_reset">
+                                    <span class="slds-truncate" title="Action(s)">Action(s)</span>
+                                </div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="user-toDisplay" style="font-size: xx-small;">
+                        <!-- DATA are going here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- User END -->
+        </div>
+    </div>
+</section>
+<!-- USE TEMPLATE for displaying it in a better way-->
+</body>
+<script src="assets/js/libs/jquery-2.1.4.min.js"></script>
+<script src="assets/js/libs/q.js"></script>
+<script src="assets/js/libs/jsforce.js"></script>
+<script type="module" src="assets/js/main.js"></script>
+
+</html>

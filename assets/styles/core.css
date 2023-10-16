@@ -1,0 +1,41 @@
+.scrollup {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    bottom: 50px;
+    right: 100px;
+    display: none;
+    margin: 0 auto;
+    background-color: transparent;
+}
+
+.terminalContainer .Terminal div p {
+    height: 500px;
+    overflow-y: auto;
+}
+
+.Terminal {
+    height:520px !important;
+    width:100%;
+}
+
+.timelineSelected{
+    background-color: #95b7ed;
+    border-radius: 2px;
+}
+
+.error{
+    background:#c23934; color:white;
+}
+
+.success{
+    background:#4bca81; color:white;
+}
+
+.canceled{
+    background:#f28b00; color:white;
+}
+
+.slds-global-header_container{
+    position: inherit !important;
+}
