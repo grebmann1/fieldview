@@ -1,14 +1,14 @@
 ## Field Viewer Extension
 
-### Introduction
+## Introduction
  TBD
 
-### Installation
+## Installation
 
 TBD
  
-### Features
- 1. Display all fields value directly from the record page
- 2. Search Users
-    - Login As
-    - Create Debug Logs
+## Features
+### Display all fields value directly from the record page
+![Record Feature](screenshots/feature_record.png)
+### Search users & login-as
+![User Feature](screenshots/feature_user.png)
